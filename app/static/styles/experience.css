@@ -1,0 +1,27 @@
+h4 {
+  margin: 0px 0px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.experience {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  height: fit-content;
+  margin-top: 2em;
+}
+
+.subheader {
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+}
