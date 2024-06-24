@@ -61,6 +61,8 @@ body {
   text-align: center;
   height: 320px;
   margin-bottom: 50px;
+  /* display: flex;
+  justify-content: center; */
 }
 
 .profile h1 {
@@ -101,4 +103,17 @@ body {
   color: white;
   font-size: 50px;
   font-weight: 700;
+}
+
+.menu {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  margin-left: 29%;
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
