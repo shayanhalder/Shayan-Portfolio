@@ -25,4 +25,7 @@ def experience():
 def about():
     return render_template('about.html')
 
-
+@app.route('/hobbies')
+def hobbes():
+    template = env.get_template('hobbies.html')
+    return template.render()
