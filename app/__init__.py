@@ -22,3 +22,8 @@ def experience():
     return template.render(experience_title="Major League Hacking", date_range="January 2024 - Present", 
                             role_name="SWE Intern", location="Remote", content="Learned about Production Engineering")
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
