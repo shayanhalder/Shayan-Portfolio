@@ -1,0 +1,32 @@
+body {
+  /* display: flex;
+  justify-content: center;
+  flex-direction: column; */
+}
+
+.root {
+  /* display: flex;
+  justify-content: center; */
+}
+#form {
+  display: flex;
+  justify-content: center;
+}
+
+#postContainer {
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  margin-left: 35%;
+  margin-top: 4em;
+  flex-direction: column;
+}
+
+.post {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2em;
+  border: 1px solid black;
+}

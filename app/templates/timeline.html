@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline Posts</title>
+    <link lang='css' rel="stylesheet" href="./static/styles/timeline.css">
+</head>
+<body>
+    <div class="root">
+        <form id="form">
+            <input name="name" type="text" placeholder="Name"> 
+            <input name="email" type="text" placeholder="Email">
+            <input name="content" type="text" placeholder="Content">
+            <button type="submit">Submit</button>
+    
+        </form>
+    
+        <div id="postContainer">
+    
+    
+        </div>
+    </div>
+    
+</body>
+
+<script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const payload = new FormData(form);
+        const promise = await fetch('http://127.0.0.1:5000/api/timeline_post', {
+            method: "POST",
+            body: payload
+        });
+        const data = await promise.json()
+        console.log(data); 
+        form.reset();
+        getPosts();
+    });
+
+    async function getPosts() {
+        const promise = await fetch('http://127.0.0.1:5000/api/timeline_post');
+        const posts = await promise.json();
+        console.log(posts);
+
+        const postContainer = document.getElementById('postContainer');
+        postContainer.innerHTML = '';
+        for (let post of posts['timeline_posts']) {
+            const node = document.createElement('div');
+            node.classList.add('post')
+
+            const name = document.createElement('div');
+            name.textContent = `Name: ${post.name}`;
+            const email = document.createElement('div');
+            email.textContent = `Email: ${post.email}`;
+            const content = document.createElement('div');
+            content.textContent = `Content: ${post.content}`
+
+            node.appendChild(name);
+            node.appendChild(email);
+            node.appendChild(content);
+
+            postContainer.appendChild(node);
+        }
+
+        console.log('finished updating...')
+    }
+
+    getPosts();
+
+    
+    
+
+    
+
+</script>
+</html>

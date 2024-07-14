@@ -75,4 +75,6 @@ def get_time_line_post():
         ]
     }
 
-
+@app.route('/timeline', methods=["GET"])
+def timeline():
+    return render_template('timeline.html', title='Timeline')
