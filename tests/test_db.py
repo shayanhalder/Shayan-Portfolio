@@ -7,7 +7,7 @@ from app import TimelinePost
 
 MODELS = [TimelinePost]
 
-# Use an in-memory SQLite for tests.
+
 test_db = SqliteDatabase(':memory:')
 
 class TestTimelinePost(unittest.TestCase):
@@ -36,4 +36,3 @@ class TestTimelinePost(unittest.TestCase):
         second_post = TimelinePost.create(name='Jane Doe',
             email='jane@example.com', content='Hello world, I\'m Jane!')
         assert second_post.id == 2
-        # TODO: Get timeline posts and assert that they are correct
