@@ -16,6 +16,7 @@ mydb = MySQLDatabase(
     host=os.getenv("MYSQL_HOST"),
     port=3306
 )
+print(mydb)
 
 class TimelinePost(Model):
     name = CharField()
@@ -31,7 +32,7 @@ class TimelinePost(Model):
 mydb.connect()
 mydb.create_tables([TimelinePost])
 
-print(mydb)
+# print(mydb)
 env = Environment(
     loader=PackageLoader("app"),
     autoescape=select_autoescape()

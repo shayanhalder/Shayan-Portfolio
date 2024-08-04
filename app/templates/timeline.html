@@ -34,8 +34,6 @@
             body: payload
         });
         const data = await promise.json()
-        console.log(data); 
-        form.reset();
         getPosts();
     });
 
@@ -49,22 +47,13 @@
         for (let post of posts['timeline_posts']) {
             const node = document.createElement('div');
             node.classList.add('post')
-
-            const name = document.createElement('div');
-            name.textContent = `Name: ${post.name}`;
-            const email = document.createElement('div');
-            email.textContent = `Email: ${post.email}`;
-            const content = document.createElement('div');
-            content.textContent = `Content: ${post.content}`
-
-            node.appendChild(name);
-            node.appendChild(email);
-            node.appendChild(content);
-
-            postContainer.appendChild(node);
+            node.innerHTML = `
+                <div> ${post['name']} </div>
+                <div> ${post['email']} </div>
+                <div>${post['content']}</div>
+            `
+            postContainer.append(node);
         }
-
-        console.log('finished updating...')
     }
 
     getPosts();
