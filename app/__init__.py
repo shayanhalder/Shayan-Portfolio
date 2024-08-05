@@ -1,6 +1,6 @@
 import os
 import datetime
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 from dotenv import load_dotenv
 from jinja2 import Environment, PackageLoader, select_autoescape
 from peewee import *
@@ -9,13 +9,17 @@ from playhouse.shortcuts import model_to_dict
 load_dotenv()
 app = Flask(__name__)
 
-mydb = MySQLDatabase(
-    os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306
-)
+if os.getenv("TESTING") == "true":
+    print('Running in test mode')
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:    
+    mydb = MySQLDatabase(
+        os.getenv("MYSQL_DATABASE"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306
+    )
 print(mydb)
 
 class TimelinePost(Model):
@@ -59,6 +63,20 @@ def hobbes():
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
+    required_fields = {'name', 'content', 'email'}
+    invalid_fields = []
+    for field in required_fields:
+        if field == "email" and ("@" not in request.form[field] and ".com" not in request.form[field]):
+            invalid_fields.append(field)
+        if field not in request.form or len(request.form[field].strip()) == 0: 
+            invalid_fields.append(field)
+    
+    if invalid_fields:
+        message = []
+        for field in invalid_fields:
+            message.append("Invalid " + field)
+        return jsonify({"status_code": 400, "message": message})
+    
     name = request.form['name']
     content = request.form['content']
     email = request.form['email']
