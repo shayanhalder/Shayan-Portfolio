@@ -29,7 +29,7 @@
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         const payload = new FormData(form);
-        const promise = await fetch('http://64.23.160.122/api/timeline_post', {
+        const promise = await fetch('http://64.23.160.122:5000/api/timeline_post', {
             method: "POST",
             body: payload
         });
@@ -38,7 +38,7 @@
     });
 
     async function getPosts() {
-        const promise = await fetch('http://64.23.160.122/api/timeline_post');
+        const promise = await fetch('http://64.23.160.122:5000/api/timeline_post');
         const posts = await promise.json();
         console.log(posts);
 
